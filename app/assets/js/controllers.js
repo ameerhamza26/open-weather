@@ -1,6 +1,6 @@
 angular.module('WeatherApp.Controllers', [])
 
-.controller('HomeCtrl', function($scope, $http, LocationService, WeatherService, $q, WeatherDetails) {
+.controller('HomeCtrl', function($scope, LocationService, WeatherService, $q, WeatherDetails) {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(handlePosition);
@@ -30,6 +30,7 @@ angular.module('WeatherApp.Controllers', [])
                 $scope.weather = res;
                 $scope.icon = "http://openweathermap.org/img/w/" + res.weather[0].icon + ".png";
                 $scope.isLoading = false;
+                console.log(res.wind.speed)
                 WeatherDetails.getWindSpeed(res.wind.speed).then(function(res) {
                     $scope.windspeed = res;
                 })

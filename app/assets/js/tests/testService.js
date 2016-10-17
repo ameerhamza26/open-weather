@@ -3,10 +3,10 @@ describe('service tests', function() {
     beforeEach(function() {
         module(function($provide) {
             $provide.service('$http', [function() {
-                this.alert = jasmine.createSpy('alert');
+                this.get = jasmine.createSpy('get');
             }]);
             $provide.service('$q', [function() {
-                this.alert = jasmince.createSpy('alert');
+                this.defer = jasmine.createSpy('defer');
             }]);
         })
         module('WeatherApp.services')
@@ -17,12 +17,10 @@ describe('service tests', function() {
         mockWeatherDetails = WeatherDetails;
     }));
 
-    it('should show alert when params is not passed into getWindSpeed', function() {
-        var params = {};
+    it('should show Light Breez when 1.66 is not passed into getWindSpeed', function() {
+        var params = 1.66;
         mockWeatherDetails.getWindSpeed(params);
 
-        expect(mockHttp.alert).toHaveBeenCalled();
-        expect(mockHttp.alert).toHaveBeenCalledWith(message);
-        expect(mockWeatherDetails.getWindSpeed).not.toHaveBeenCalled();
+        expect(mockHttp.get).toHaveBeenCalledWith(param);
     });
 });
