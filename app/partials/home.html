@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content class="md-padding" style="background-color: royalblue;">
     <div id="map"></div>
     <div layout="row" layout-wrap layout-align="center">
         <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.description || item.formatted_address" md-min-length="0" placeholder="Enter City, Country or Zipcode" style="width: 400px;">
@@ -8,13 +8,15 @@
         </md-autocomplete>
     </div>
     <div ng-repeat="suggestion in search.suggestions" ng-click="choosePlace(suggestion)">
-        {{suggestion.description || suggestion.formatted_address}}
+            {{suggestion.description || suggestion.formatted_address}}
     </div>
+    <div ng-if="isLoading" class="cssload-container">
+        <div class="cssload-double-torus"></div>
     </div>
-    <div style="width:400px; margin:auto; height: auto">
-        <h1>Weather in {{weather.name}}, {{weather.sys.country}}</h1>
+    <div ng-if="!isLoading && locationisget" style="width:400px; margin:auto; height: auto; background-color: white;">
+        <h1 style="padding: 5px;">Weather in {{country}}</h1>
         <div>
-            <img ng-src="{{icon}}"><span>{{weather.main.temp -273 | limitTo : 5}}<sup>o</sup> C</span>
+           <div class="img-icon"> <img ng-src="{{icon}}"></div><div class="weather">{{weather.main.temp -273 | limitTo : 5}}<sup>o</sup> C</div>
         </div>
         <table>
             <tr>
